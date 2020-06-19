@@ -13,7 +13,7 @@ DOMController.renderProjects(projects);
 
 
 projects.forEach((project) => {
-  if (project.IsActive()) {
+  if (project.isActive()) {
     DOMController.renderTasks(project);
   }
 })

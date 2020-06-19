@@ -46,3 +46,7 @@ body{
 .project-card{
     border: 1px solid black;
 }
+
+.task-card{
+    border: 1px solid black;
+}
