@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 import projectSorage from './storage.js';
+import pubSub from './pubsub.js';
 
 /// DOM CACHING
 const DOMController = (() => {
@@ -53,29 +54,34 @@ const DOMController = (() => {
     const tasks = project.getTasks();
     tasks.forEach((task) => {
       const taskCard = document.createElement('div');
+      const taskTitleDiv = document.createElement('div');
       const taskTitle = document.createElement('h4');
+      const taskDescriptionDiv = document.createElement('div');
       const taskDescription = document.createElement('p');
       const taskChecklist = createChecklist(task.getChecklist());
       const taskCompleted = document.createElement('button');
 
       taskCard.classList.add('task-card');
+      taskTitleDiv.classList.add('task-title-container');
+      taskDescriptionDiv.classList.add('task-description-container');
 
       taskTitle.textContent = task.getTitle();
       taskDescription.textContent = task.getDescription();
       if (task.isCompleted()) {
         taskCompleted.style['background-color'] = 'green';
-      } else {taskCompleted.style['background-color'] = 'red'; }
+      } else { taskCompleted.style['background-color'] = 'red'; }
 
-      taskCard.appendChild(taskTitle);
-      taskCard.appendChild(taskDescription);
+      taskTitleDiv.appendChild(taskTitle);
+      taskTitleDiv.appendChild(taskCompleted);
+      taskDescriptionDiv.appendChild(taskDescription);
+      taskCard.appendChild(taskTitleDiv);
+      taskCard.appendChild(taskDescriptionDiv);
       taskCard.appendChild(taskChecklist);
-      taskCard.appendChild(taskCompleted);
+      
 
       tasksContainer.appendChild(taskCard);
     });
   };
-
-
 
   return {
     renderProjects,
