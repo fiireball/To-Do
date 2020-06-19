@@ -1,0 +1,45 @@
+html{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    background-color: deepskyblue;
+}
+
+.main-content{
+    display: flex;
+    flex-flow: row;
+    background-color: darkolivegreen;
+    height: 100%;
+    width: 100%;
+}
+
+.projects-container{
+    height: auto;
+    width: 350px;
+    position: relative;
+    background-color: darkslateblue;
+}
+
+.tasks-container {
+    background-color: darkorange;
+    width: 100%;
+}
+
