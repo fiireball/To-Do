@@ -50,3 +50,9 @@ body{
 .task-card{
     border: 1px solid black;
 }
+
+.task-title-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgrey;
+}
