@@ -24,7 +24,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
 
   const getChecklist = () => _checklist;
 
-  const getCompleted = () => _completed;
+  const isCompleted = () => _completed;
 
   const toggleCompleted = () => {
     if (_completed) {
@@ -41,7 +41,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     getPriority,
     getNotes,
     getChecklist,
-    getCompleted,
+    isCompleted,
     toggleCompleted,
   };
 };
