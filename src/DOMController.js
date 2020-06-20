@@ -27,6 +27,7 @@ const DOMController = (() => {
         projectCard.style['background-color'] = 'darkorange';
       }
 
+      projectCard.setAttribute('data-name', projectTitle);
       projectCard.style['border-color'] = projectColor;
       cardTitle.textContent = projectTitle;
       cardDescription.textContent = projectDescription;
@@ -37,6 +38,7 @@ const DOMController = (() => {
       projectCard.appendChild(cardUpperDiv);
       projectCard.appendChild(cardLowerDiv);
     });
+    pubSub.emit('projectsRendered', projectsContainer);
   };
 
   const createChecklist = (checklist) => {
@@ -57,7 +59,13 @@ const DOMController = (() => {
   };
 
   const renderTasks = (project) => {
-    const tasks = project.getTasks();
+    let tasks;
+    if (Array.isArray(project)) {
+      tasks = project;
+    } else {
+      tasks = project.getTasks();
+    }
+
     tasks.forEach((task) => {
       const taskCard = document.createElement('div');
       const taskTitleDiv = document.createElement('div');
@@ -88,9 +96,38 @@ const DOMController = (() => {
     });
   };
 
+  const clearTasks = () => {
+    const taskCards = tasksContainer.querySelectorAll('.task-card');
+    taskCards.forEach((card) => {
+      card.remove();
+    })
+  };
+
+  const refreshTasksRender = (activeProject) => {
+    clearTasks();
+    renderTasks(activeProject);
+  };
+
+  
+
   return {
     renderProjects,
     renderTasks,
+    refreshTasksRender,
   };
 })();
+
+const clickListeners = (() => {
+  const addProjectListeners = (div) => {
+    const projectsCards = div.children;
+    for (let i = 0; i < projectsCards.length; i++) {
+      projectsCards[i].addEventListener('click', () => {
+        pubSub.emit('aProjectClicked', projectsCards[i].dataset.name);
+      });
+    }
+  };
+
+  pubSub.on('projectsRendered', addProjectListeners);
+})();
+
 export default DOMController;

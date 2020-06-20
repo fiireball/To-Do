@@ -1,6 +1,8 @@
+import pubSub from './pubsub';
+
 /* eslint-disable no-underscore-dangle */
 const projectFactory = (title, description, color) => {
-  const type = 'Project';
+  const _type = 'Project';
   let _title = title;
   let _description = description;
   let _color = color;
@@ -8,6 +10,8 @@ const projectFactory = (title, description, color) => {
   let _isActive = false;
 
   // GETTER & SETTER
+  const getType = () => _type;
+
   const getTitle = () => _title;
 
   const getDescription = () => _description;
@@ -28,7 +32,18 @@ const projectFactory = (title, description, color) => {
     setTasks(tasks);
   };
 
+  const toggleActive = (refTitle) => {
+    if (_isActive) { setActiveFalse(); }
+    if (refTitle === _title) { setActiveTrue(); }
+    if (_isActive) {
+      pubSub.emit('activeProjectChanged', _tasks);
+    }
+  };
+
+  pubSub.on('aProjectClicked', toggleActive);
+
   return {
+    getType,
     getTitle,
     getDescription,
     getColor,

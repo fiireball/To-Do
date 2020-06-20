@@ -6,11 +6,12 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   let _description = description;
   let _dueDate = dueDate;
   let _priority = priority;
-  let _notes  = notes;
+  let _notes = notes;
   let _checklist = checklist;
   let _completed = completed;
 
   // GETTER & SETTER
+  const getType = () => _type;
 
   const getTitle = () => _title;
 
@@ -35,6 +36,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   };
 
   return {
+    getType,
     getTitle,
     getDescription,
     getDueDate,

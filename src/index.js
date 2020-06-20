@@ -11,9 +11,10 @@ const projects = demo.getProjects();
 
 DOMController.renderProjects(projects);
 
-
 projects.forEach((project) => {
   if (project.isActive()) {
     DOMController.renderTasks(project);
   }
-})
+});
+
+pubSub.on('activeProjectChanged', DOMController.refreshTasksRender);
