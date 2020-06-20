@@ -16,8 +16,6 @@ const demo = (() => {
   project2.addTask(toDo3);
   project2.addTask(toDo4);
 
-  project2.toggleIsActive();
-
   const projects = [project1, project2];
 
   const getProjects = () => projects;

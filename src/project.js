@@ -18,13 +18,8 @@ const projectFactory = (title, description, color) => {
   const setTasks = (newTask) => { _tasks = newTask; };
 
   const isActive = () => _isActive;
-  const toggleIsActive = () => {
-    if (_isActive) {
-      _isActive = false;
-    } else {
-      _isActive = true;
-    }
-  };
+  const setActiveTrue = () => { _isActive = true; };
+  const setActiveFalse = () => { _isActive = false; };
 
   const addTask = (task) => {
     const tasks = getTasks();
@@ -41,7 +36,8 @@ const projectFactory = (title, description, color) => {
     addTask,
     setTasks,
     isActive,
-    toggleIsActive,
+    setActiveTrue,
+    setActiveFalse,
   };
 };
 
