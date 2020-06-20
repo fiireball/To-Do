@@ -10,6 +10,8 @@ const DOMController = (() => {
   const renderProjects = (allProjects) => {
     allProjects.forEach((project) => {
       const projectCard = document.createElement('div');
+      const cardUpperDiv = document.createElement('div');
+      const cardLowerDiv = document.createElement('div');
       const cardTitle = document.createElement('h4');
       const cardDescription = document.createElement('p');
       const projectTitle = project.getTitle();
@@ -17,8 +19,11 @@ const DOMController = (() => {
       const projectColor = project.getColor();
 
       projectCard.classList.add('project-card');
+      cardUpperDiv.classList.add('project-card-upper');
+      cardLowerDiv.classList.add('project-card-lower');
 
       if (project.isActive()) {
+        projectCard.classList.add('active-project');
         projectCard.style['background-color'] = 'darkorange';
       }
 
@@ -27,13 +32,14 @@ const DOMController = (() => {
       cardDescription.textContent = projectDescription;
 
       projectsContainer.appendChild(projectCard);
-      projectCard.appendChild(cardTitle);
-      projectCard.appendChild(cardDescription);
+      cardUpperDiv.appendChild(cardTitle);
+      cardLowerDiv.appendChild(cardDescription);
+      projectCard.appendChild(cardUpperDiv);
+      projectCard.appendChild(cardLowerDiv);
     });
   };
 
   const createChecklist = (checklist) => {
-    console.log(checklist);
     const checklistDiv = document.createElement('div');
     checklistDiv.classList.add('checklist-container');
 
@@ -77,7 +83,6 @@ const DOMController = (() => {
       taskCard.appendChild(taskTitleDiv);
       taskCard.appendChild(taskDescriptionDiv);
       taskCard.appendChild(taskChecklist);
-      
 
       tasksContainer.appendChild(taskCard);
     });
