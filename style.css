@@ -31,7 +31,7 @@ body{
     width: 100%;
 }
 
-.projects-container{
+.projects-container, .new-projects-container{
     height: auto;
     width: 350px;
     position: relative;
@@ -45,6 +45,11 @@ body{
 
 .project-card{
     border: 1px solid black;
+}
+
+#add-new-project-btn {
+    width: 100%;
+    padding: 10px 0;
 }
 
 .task-card{
