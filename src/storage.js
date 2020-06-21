@@ -9,9 +9,14 @@ const projectStorage = (() => {
     _projects.push(newProject);
   };
 
+  const setProjects = (projects) => {
+    _projects = projects;
+  }
+
   return {
     getAllProjects,
     addNewProject,
+    setProjects,
   };
 })();
 
