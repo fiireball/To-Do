@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import projectSorage from './storage.js';
 import pubSub from './pubsub.js';
+import { add } from 'date-fns';
 
 /// DOM CACHING
 const DOMController = (() => {
@@ -108,12 +109,23 @@ const DOMController = (() => {
     renderTasks(activeProject);
   };
 
-  
+  const showAddProjectWindow = () => {
+    const addProjectWindow = document.querySelector('.new-project-window')
+    const overlay = document.querySelector('.overlay')
+    addProjectWindow.classList.add('active')
+    overlay.classList.add('active')
+    overlay.addEventListener('click', () => {
+      addProjectWindow.classList.remove('active')
+      overlay.classList.remove('active')
+    })
+
+  }
 
   return {
     renderProjects,
     renderTasks,
     refreshTasksRender,
+    showAddProjectWindow,
   };
 })();
 
@@ -126,6 +138,9 @@ const clickListeners = (() => {
       });
     }
   };
+  // Add new project button (open window to create new project)
+  const newProjectButton = document.getElementById('add-new-project-btn')
+  newProjectButton.addEventListener('click', DOMController.showAddProjectWindow)
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();
