@@ -120,7 +120,7 @@ const DOMController = (() => {
     });
   };
 
-  const addProjectToStorage = () => {
+  const getNewProjectUserInput = () => {
     const input = {
       title: document.getElementById('new-project-title').value,
       description: document.getElementById('new-project-description').value,
@@ -135,7 +135,7 @@ const DOMController = (() => {
     renderTasks,
     refreshTasksRender,
     showAddProjectWindow,
-    addProjectToStorage,
+    getNewProjectUserInput,
   };
 })();
 
@@ -153,7 +153,7 @@ const clickListeners = (() => {
   newProjectButton.addEventListener('click', DOMController.showAddProjectWindow);
 
   const addNewProjectButton = document.getElementById('add-project-to-projects');
-  addNewProjectButton.addEventListener('click', DOMController.addProjectToStorage);
+  addNewProjectButton.addEventListener('click', DOMController.getNewProjectUserInput);
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();
