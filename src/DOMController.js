@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
+import { add } from 'date-fns';
 import projectSorage from './storage.js';
 import pubSub from './pubsub.js';
-import { add } from 'date-fns';
 
 /// DOM CACHING
 const DOMController = (() => {
@@ -101,7 +101,7 @@ const DOMController = (() => {
     const taskCards = tasksContainer.querySelectorAll('.task-card');
     taskCards.forEach((card) => {
       card.remove();
-    })
+    });
   };
 
   const refreshTasksRender = (activeProject) => {
@@ -110,22 +110,32 @@ const DOMController = (() => {
   };
 
   const showAddProjectWindow = () => {
-    const addProjectWindow = document.querySelector('.new-project-window')
-    const overlay = document.querySelector('.overlay')
-    addProjectWindow.classList.add('active')
-    overlay.classList.add('active')
+    const addProjectWindow = document.querySelector('.new-project-window');
+    const overlay = document.querySelector('.overlay');
+    addProjectWindow.classList.add('active');
+    overlay.classList.add('active');
     overlay.addEventListener('click', () => {
-      addProjectWindow.classList.remove('active')
-      overlay.classList.remove('active')
-    })
+      addProjectWindow.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  };
 
-  }
+  const addProjectToStorage = () => {
+    const input = {
+      title: document.getElementById('new-project-title').value,
+      description: document.getElementById('new-project-description').value,
+      color: undefined,
+    }
+
+    pubSub.emit('newProjectToCreate', input);
+  };
 
   return {
     renderProjects,
     renderTasks,
     refreshTasksRender,
     showAddProjectWindow,
+    addProjectToStorage,
   };
 })();
 
@@ -139,8 +149,11 @@ const clickListeners = (() => {
     }
   };
   // Add new project button (open window to create new project)
-  const newProjectButton = document.getElementById('add-new-project-btn')
-  newProjectButton.addEventListener('click', DOMController.showAddProjectWindow)
+  const newProjectButton = document.getElementById('add-new-project-btn');
+  newProjectButton.addEventListener('click', DOMController.showAddProjectWindow);
+
+  const addNewProjectButton = document.getElementById('add-project-to-projects');
+  addNewProjectButton.addEventListener('click', DOMController.addProjectToStorage);
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();

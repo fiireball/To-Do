@@ -1,3 +1,5 @@
+import pubSub from "./pubsub";
+
 /* eslint-disable no-underscore-dangle */
 const projectStorage = (() => {
   const _type = 'Project-Storage';
@@ -13,11 +15,15 @@ const projectStorage = (() => {
     _projects = projects;
   }
 
+
+
   return {
     getAllProjects,
     addNewProject,
     setProjects,
   };
 })();
+
+pubSub.on('newProjectCreated', projectStorage.addNewProject);
 
 export default projectStorage;

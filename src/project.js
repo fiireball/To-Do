@@ -56,4 +56,15 @@ const projectFactory = (title, description, color) => {
   };
 };
 
+const createNewProject = (input) => {
+  console.log('input: ', input);
+
+  const _newProject = projectFactory(input.title, input.description, input.color);
+  console.log('_newProject.getTitle()', _newProject.getTitle());
+  console.log('_newProject.getDescription()', _newProject.getDescription());
+  pubSub.emit('newProjectCreated', _newProject);
+};
+
+pubSub.on('newProjectToCreate', createNewProject);
+
 export default projectFactory;
