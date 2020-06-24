@@ -9,13 +9,12 @@ const projectStorage = (() => {
 
   const addNewProject = (newProject) => {
     _projects.push(newProject);
+    pubSub.emit('projectsListChanged', _projects);
   };
 
   const setProjects = (projects) => {
     _projects = projects;
-  }
-
-
+  };
 
   return {
     getAllProjects,

@@ -8,7 +8,11 @@ import projectStorage from './storage.js';
 
 console.log('webpack init');
 
-const projects = demo.getProjects();
+const demoProjects = demo.getProjects();
+
+projectStorage.setProjects(demoProjects);
+
+const projects = projectStorage.getAllProjects();
 
 DOMController.renderProjects(projects);
 
@@ -19,3 +23,4 @@ projects.forEach((project) => {
 });
 
 pubSub.on('activeProjectChanged', DOMController.refreshTasksRender);
+pubSub.on('projectsListChanged', DOMController.refreshProjectsRenderer);

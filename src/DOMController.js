@@ -2,6 +2,7 @@
 import { add } from 'date-fns';
 import projectSorage from './storage.js';
 import pubSub from './pubsub.js';
+import projectStorage from './storage.js';
 
 /// DOM CACHING
 const DOMController = (() => {
@@ -25,7 +26,6 @@ const DOMController = (() => {
 
       if (project.isActive()) {
         projectCard.classList.add('active-project');
-        projectCard.style['background-color'] = 'darkorange';
       }
 
       projectCard.setAttribute('data-name', projectTitle);
@@ -104,9 +104,20 @@ const DOMController = (() => {
     });
   };
 
+  const clearProjects = () => {
+    while (projectsContainer.firstChild) {
+      projectsContainer.firstChild.remove();
+    }
+  };
+
   const refreshTasksRender = (activeProject) => {
     clearTasks();
     renderTasks(activeProject);
+  };
+
+  const refreshProjectsRenderer = (storedProjects) => {
+    clearProjects();
+    renderProjects(storedProjects);
   };
 
   const showAddProjectWindow = () => {
@@ -125,17 +136,25 @@ const DOMController = (() => {
       title: document.getElementById('new-project-title').value,
       description: document.getElementById('new-project-description').value,
       color: undefined,
-    }
-
+    };
     pubSub.emit('newProjectToCreate', input);
+  };
+
+  const switchToActiveProject = (projectsCards, clickedProject) => {
+    for (let i = 0; i < projectsCards.length; i++) {
+      projectsCards[i].classList.remove('active-project');
+    }
+    clickedProject.classList.add('active-project');
   };
 
   return {
     renderProjects,
     renderTasks,
     refreshTasksRender,
+    refreshProjectsRenderer,
     showAddProjectWindow,
     getNewProjectUserInput,
+    switchToActiveProject,
   };
 })();
 
@@ -145,6 +164,7 @@ const clickListeners = (() => {
     for (let i = 0; i < projectsCards.length; i++) {
       projectsCards[i].addEventListener('click', () => {
         pubSub.emit('aProjectClicked', projectsCards[i].dataset.name);
+        DOMController.switchToActiveProject(projectsCards, projectsCards[i]);
       });
     }
   };

@@ -47,6 +47,10 @@ body{
     border: 1px solid black;
 }
 
+.active-project{
+    background-color: darkorange;
+}
+
 #add-new-project-btn {
     width: 100%;
     padding: 10px 0;
