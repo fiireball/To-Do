@@ -150,6 +150,17 @@ const DOMController = (() => {
     pubSub.emit('newProjectToCreate', input);
   };
 
+  const getNewTaskUserInput = () => {
+    const input = {
+      title: document.getElementById('new-task-title').value,
+      description: document.getElementById('new-task-description').value,
+      priority: document.getElementById('task-priority-select').value,
+      dueDate: document.getElementById('task-due-date').value,
+      notes: document.getElementById('task-notes-input').value,
+    };
+    pubSub.emit('newTaskToCreate', input);
+  };
+
   const switchToActiveProject = (projectsCards, clickedProject) => {
     for (let i = 0; i < projectsCards.length; i++) {
       projectsCards[i].classList.remove('active-project');
@@ -166,6 +177,7 @@ const DOMController = (() => {
     showAddTaskWindow,
     getNewProjectUserInput,
     switchToActiveProject,
+    getNewTaskUserInput
   };
 })();
 
@@ -188,6 +200,9 @@ const clickListeners = (() => {
 
   const newTaskButton = document.getElementById('add-new-task-btn');
   newTaskButton.addEventListener('click', DOMController.showAddTaskWindow);
+
+  const addNewTaskButton = document.getElementById('add-task-to-project');
+  addNewTaskButton.addEventListener('click', DOMController.getNewTaskUserInput);
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();
