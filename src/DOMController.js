@@ -8,6 +8,7 @@ import projectStorage from './storage.js';
 const DOMController = (() => {
   const projectsContainer = document.querySelector('.projects-container');
   const tasksContainer = document.querySelector('.tasks-container');
+  const overlay = document.querySelector('.overlay');
 
   const renderProjects = (allProjects) => {
     allProjects.forEach((project) => {
@@ -122,11 +123,20 @@ const DOMController = (() => {
 
   const showAddProjectWindow = () => {
     const addProjectWindow = document.querySelector('.new-project-window');
-    const overlay = document.querySelector('.overlay');
     addProjectWindow.classList.add('active');
     overlay.classList.add('active');
     overlay.addEventListener('click', () => {
       addProjectWindow.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  };
+  
+  const showAddTaskWindow = () => {
+    const addTaskWindow = document.querySelector('.new-task-window');
+    addTaskWindow.classList.add('active');
+    overlay.classList.add('active');
+    overlay.addEventListener('click', () => {
+      addTaskWindow.classList.remove('active');
       overlay.classList.remove('active');
     });
   };
@@ -153,6 +163,7 @@ const DOMController = (() => {
     refreshTasksRender,
     refreshProjectsRenderer,
     showAddProjectWindow,
+    showAddTaskWindow,
     getNewProjectUserInput,
     switchToActiveProject,
   };
@@ -174,6 +185,9 @@ const clickListeners = (() => {
 
   const addNewProjectButton = document.getElementById('add-project-to-projects');
   addNewProjectButton.addEventListener('click', DOMController.getNewProjectUserInput);
+
+  const newTaskButton = document.getElementById('add-new-task-btn');
+  newTaskButton.addEventListener('click', DOMController.showAddTaskWindow);
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();
