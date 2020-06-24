@@ -16,10 +16,20 @@ const projectStorage = (() => {
     _projects = projects;
   };
 
+  const getActiveProject = () => {
+    _projects.forEach((project) => {
+      if (project.isActive()) {
+        console.log(project);
+        return project;
+      }
+    });
+  };
+
   return {
     getAllProjects,
     addNewProject,
     setProjects,
+    getActiveProject,
   };
 })();
 
