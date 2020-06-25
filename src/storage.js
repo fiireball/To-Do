@@ -43,7 +43,7 @@ const addTaskToActiveProject = (newTask) => {
   } else {
     const err = 'ERROR - no current project';
     console.log(err, currentProject);
-    pubSub.emit('noActiveProjectToAddTaskTo', err);
+    pubSub.emit('taskAddError', err);
   }
 };
 

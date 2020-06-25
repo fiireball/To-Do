@@ -11,6 +11,7 @@ const DOMController = (() => {
   const overlay = document.querySelector('.overlay');
   const addTaskWindow = document.querySelector('.new-task-window');
   const addProjectWindow = document.querySelector('.new-project-window');
+  const taskWindowErrorContainer = addTaskWindow.querySelector('.task-window-error');
 
   /// Render stuff
   const renderProjects = (allProjects) => {
@@ -159,7 +160,11 @@ const DOMController = (() => {
       dueDate: document.getElementById('task-due-date').value,
       notes: document.getElementById('task-notes-input').value,
     };
-    pubSub.emit('newTaskToCreate', input);
+    if (!input.title || !input.dueDate) {
+      pubSub.emit('taskAddError', 'Fill out required fields');
+    } else {
+      pubSub.emit('newTaskToCreate', input);
+    }
   };
 
   const switchToActiveProject = (projectsCards, clickedProject) => {
@@ -170,12 +175,10 @@ const DOMController = (() => {
   };
 
   const renderTaskWindowError = (err) => {
-    const taskWindowErrorContainer = addTaskWindow.querySelector('.task-window-error');
-    taskWindowErrorContainer.style.color = 'red';
     taskWindowErrorContainer.textContent = err;
   };
 
-  pubSub.on('noActiveProjectToAddTaskTo', renderTaskWindowError);
+  pubSub.on('taskAddError', renderTaskWindowError);
 
   return {
     renderProjects,
@@ -211,7 +214,10 @@ const clickListeners = (() => {
   newTaskButton.addEventListener('click', DOMController.showAddTaskWindow);
 
   const addNewTaskButton = document.getElementById('add-task-to-project');
-  addNewTaskButton.addEventListener('click', DOMController.getNewTaskUserInput);
+  addNewTaskButton.addEventListener('click', () => {
+    pubSub.emit('taskAddError', ''); // clear out previous error from DOM
+    DOMController.getNewTaskUserInput();
+  });
 
   pubSub.on('projectsRendered', addProjectListeners);
 })();
