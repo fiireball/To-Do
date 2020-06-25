@@ -27,7 +27,6 @@ const projectFactory = (title, description, color) => {
 
   const addTask = (task) => {
     const tasks = getTasks();
-
     tasks.push(task);
     setTasks(tasks);
   };

@@ -23,4 +23,5 @@ projects.forEach((project) => {
 });
 
 pubSub.on('activeProjectChanged', DOMController.refreshTasksRender);
+pubSub.on('tasksChanged', DOMController.refreshTasksRender);
 pubSub.on('projectsListChanged', DOMController.refreshProjectsRenderer);

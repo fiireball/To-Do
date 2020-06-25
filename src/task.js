@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
+import pubSub from "./pubsub";
+
 const taskFactory = (title, description, dueDate, priority, notes, checklist, completed) => {
   const _type = 'Task';
   let _title = title;
@@ -47,5 +49,14 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     toggleCompleted,
   };
 };
+
+const createNewTask = (input) => {
+  const _newTask = taskFactory(input.title, input.description, input.dueDate,
+    input.priority, input.notes, input.checklist, false);
+  console.log(_newTask);
+  pubSub.emit('newTaskCreated', _newTask);
+};
+
+pubSub.on('newTaskToCreate', createNewTask);
 
 export default taskFactory;

@@ -46,17 +46,17 @@ const DOMController = (() => {
   const createChecklist = (checklist) => {
     const checklistDiv = document.createElement('div');
     checklistDiv.classList.add('checklist-container');
+    if (checklist) {
+      checklist.forEach((item) => {
+        const checklistItem = document.createElement('div');
 
-    checklist.forEach((item) => {
-      const checklistItem = document.createElement('div');
+        checklistItem.classList.add('checklist-item');
 
-      checklistItem.classList.add('checklist-item');
+        checklistItem.textContent = item;
 
-      checklistItem.textContent = item;
-
-      checklistDiv.appendChild(checklistItem);
-    });
-
+        checklistDiv.appendChild(checklistItem);
+      });
+    }
     return checklistDiv;
   };
 
@@ -177,7 +177,7 @@ const DOMController = (() => {
     showAddTaskWindow,
     getNewProjectUserInput,
     switchToActiveProject,
-    getNewTaskUserInput
+    getNewTaskUserInput,
   };
 })();
 
@@ -191,7 +191,7 @@ const clickListeners = (() => {
       });
     }
   };
-  // Add new project button (open window to create new project)
+  // Add new project/tasks buttons (open window and 'add' userinput data)
   const newProjectButton = document.getElementById('add-new-project-btn');
   newProjectButton.addEventListener('click', DOMController.showAddProjectWindow);
 
