@@ -37,13 +37,13 @@ const projectStorage = (() => {
 
 const addTaskToActiveProject = (newTask) => {
   const currentProject = projectStorage.getActiveProject();
-  console.log('currentProject: ', currentProject);
-
   if (currentProject) {
     currentProject.addTask(newTask);
     pubSub.emit('tasksChanged', currentProject);
   } else {
-    console.log('ERROR - currentProject: ', currentProject);
+    const err = 'ERROR - no current project';
+    console.log(err, currentProject);
+    pubSub.emit('noActiveProjectToAddTaskTo', err);
   }
 };
 

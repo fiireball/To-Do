@@ -9,7 +9,10 @@ const DOMController = (() => {
   const projectsContainer = document.querySelector('.projects-container');
   const tasksContainer = document.querySelector('.tasks-container');
   const overlay = document.querySelector('.overlay');
+  const addTaskWindow = document.querySelector('.new-task-window');
+  const addProjectWindow = document.querySelector('.new-project-window');
 
+  /// Render stuff
   const renderProjects = (allProjects) => {
     allProjects.forEach((project) => {
       const projectCard = document.createElement('div');
@@ -122,7 +125,6 @@ const DOMController = (() => {
   };
 
   const showAddProjectWindow = () => {
-    const addProjectWindow = document.querySelector('.new-project-window');
     addProjectWindow.classList.add('active');
     overlay.classList.add('active');
     overlay.addEventListener('click', () => {
@@ -130,9 +132,8 @@ const DOMController = (() => {
       overlay.classList.remove('active');
     });
   };
-  
+
   const showAddTaskWindow = () => {
-    const addTaskWindow = document.querySelector('.new-task-window');
     addTaskWindow.classList.add('active');
     overlay.classList.add('active');
     overlay.addEventListener('click', () => {
@@ -167,6 +168,14 @@ const DOMController = (() => {
     }
     clickedProject.classList.add('active-project');
   };
+
+  const renderTaskWindowError = (err) => {
+    const taskWindowErrorContainer = addTaskWindow.querySelector('.task-window-error');
+    taskWindowErrorContainer.style.color = 'red';
+    taskWindowErrorContainer.textContent = err;
+  };
+
+  pubSub.on('noActiveProjectToAddTaskTo', renderTaskWindowError);
 
   return {
     renderProjects,
