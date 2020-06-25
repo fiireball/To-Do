@@ -44,34 +44,36 @@
         <div class="new-task-window">
             <h4>New Task</h4>
             <div class="inputs-container">
-                <input type="text" id="new-task-title" placeholder="Task Title">
-                <input type="text" id="new-task-description" placeholder="Task Description">
-                <div class="due-date-container">
-                    <input type="date" name="task-due-date" id="task-due-date">
-                </div>
-                <div class="priority-container">
-                    <label for="task-priority-select">Priority: </label>
-                    <select name="task-priority-select" id="task-priority-select">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                        <option value="critical">Critical</option>
-                    </select>
-                </div>
-                <div class="notes-container">
-                    <label for="task-notes-input">Notes: </label>
-                    <textarea name="task-notes-input" id="task-notes-input"  rows="4"></textarea>
-                </div>
-                <div class="checklist-container">
+                <form>
+                    <input type="text" id="new-task-title" required placeholder="Task Title">
+                    <input type="text" id="new-task-description" placeholder="Task Description">
+                    <div class="due-date-container">
+                        <input required type="date" name="task-due-date" id="task-due-date">
+                    </div>
+                    <div class="priority-container">
+                        <label for="task-priority-select">Priority: </label>
+                        <select name="task-priority-select" id="task-priority-select">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                    <div class="notes-container">
+                        <label for="task-notes-input">Notes: </label>
+                        <textarea name="task-notes-input" id="task-notes-input"  rows="4"></textarea>
+                    </div>
+                    <div class="checklist-container">
 
+                    </div>
                 </div>
-            </div>
-            <div class="new-task-buttons">
-                <button id="add-task-to-project">Add</button>
-                <button id="cancel-task-add">Cancel</button>
-            </div>
+                <div class="new-task-buttons">
+                    <button type="button" id="add-task-to-project">Add</button>
+                    <button type="button" id="cancel-task-add">Cancel</button>
+                </div>
+           </form>
             <div class="task-window-error">
-                
+
             </div>
         </div>
         <div class="overlay"></div>
