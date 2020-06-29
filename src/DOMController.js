@@ -24,6 +24,7 @@ const DOMController = (() => {
       const projectTitle = project.getTitle();
       const projectDescription = project.getDescription();
       const projectColor = project.getColor();
+      const projectUUID = project.getUUID();
 
       projectCard.classList.add('project-card');
       cardUpperDiv.classList.add('project-card-upper');
@@ -34,6 +35,7 @@ const DOMController = (() => {
       }
 
       projectCard.setAttribute('data-name', projectTitle);
+      projectCard.setAttribute('data-ID', projectUUID);
       projectCard.style['border-color'] = projectColor;
       cardTitle.textContent = projectTitle;
       cardDescription.textContent = projectDescription;
@@ -82,6 +84,7 @@ const DOMController = (() => {
       const taskCompleted = document.createElement('button');
 
       taskCard.classList.add('task-card');
+      taskCard.setAttribute('data-ID', task.getUUID());
       taskTitleDiv.classList.add('task-title-container');
       taskDescriptionDiv.classList.add('task-description-container');
 

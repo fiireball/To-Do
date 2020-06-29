@@ -5,7 +5,7 @@ import projectFactory from './project.js';
 import DOMController from './DOMController.js';
 import demo from './demoProjects.js';
 import projectStorage from './storage.js';
-import createUUID from './utils.js';
+
 
 console.log('webpack init');
 

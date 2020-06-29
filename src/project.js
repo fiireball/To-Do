@@ -1,13 +1,14 @@
 import pubSub from './pubsub';
-
+import createUUID from './utils';
 /* eslint-disable no-underscore-dangle */
-const projectFactory = (title, description, color) => {
+const projectFactory = (title, description, color, UUID) => {
   const _type = 'Project';
   let _title = title;
   let _description = description;
   let _color = color;
   let _tasks = [];
   let _isActive = false;
+  let _UUID = UUID;
 
   // GETTER & SETTER
   const getType = () => _type;
@@ -25,6 +26,8 @@ const projectFactory = (title, description, color) => {
   const setActiveTrue = () => { _isActive = true; };
   const setActiveFalse = () => { _isActive = false; };
 
+  const getUUID = () => _UUID;
+
   const addTask = (task) => {
     const tasks = getTasks();
     tasks.push(task);
@@ -41,6 +44,14 @@ const projectFactory = (title, description, color) => {
 
   pubSub.on('aProjectClicked', toggleActive);
 
+  const initUUID = (() => {
+    if (UUID) {
+      _UUID = UUID;
+    } else {
+      _UUID = createUUID(_type);
+    }
+  })();
+
   return {
     getType,
     getTitle,
@@ -52,6 +63,7 @@ const projectFactory = (title, description, color) => {
     isActive,
     setActiveTrue,
     setActiveFalse,
+    getUUID,
   };
 };
 

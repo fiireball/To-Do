@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-
+import createUUID from './utils';
 import pubSub from "./pubsub";
 
-const taskFactory = (title, description, dueDate, priority, notes, checklist, completed) => {
+const taskFactory = (title, description, dueDate, priority, notes, checklist, completed, UUID) => {
   const _type = 'Task';
   let _title = title;
   let _description = description;
@@ -11,6 +11,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   let _notes = notes;
   let _checklist = checklist;
   let _completed = completed;
+  let _UUID = UUID;
 
   // GETTER & SETTER
   const getType = () => _type;
@@ -27,6 +28,8 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
 
   const getChecklist = () => _checklist;
 
+  const getUUID = () => _UUID;
+
   const isCompleted = () => _completed;
 
   const toggleCompleted = () => {
@@ -37,6 +40,14 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     }
   };
 
+  const initUUID = (() => {
+    if (UUID) {
+      _UUID = UUID;
+    } else {
+      _UUID = createUUID(_type);
+    }
+  })();
+
   return {
     getType,
     getTitle,
@@ -45,6 +56,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     getPriority,
     getNotes,
     getChecklist,
+    getUUID,
     isCompleted,
     toggleCompleted,
   };
