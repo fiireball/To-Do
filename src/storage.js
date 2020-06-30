@@ -27,11 +27,20 @@ const projectStorage = (() => {
     return _activeProject;
   };
 
+  const getProjectByID = (UUID) => {
+    for (let i = 0; i < _projects.length; i++) {
+      if (_projects[i].getUUID() === UUID) {
+        return _projects[i];
+      }
+    }
+  };
+
   return {
     getAllProjects,
     addNewProject,
     setProjects,
     getActiveProject,
+    getProjectByID,
   };
 })();
 
