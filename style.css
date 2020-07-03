@@ -26,7 +26,7 @@ body{
 .main-content{
     display: flex;
     flex-flow: row;
-    background-color: darkolivegreen;
+    /* background-color: darkolivegreen; */
     height: 100%;
     width: 100%;
 }
@@ -35,20 +35,22 @@ body{
     height: auto;
     width: 350px;
     position: relative;
-    background-color: rgb(147, 143, 170);
+    /* background-color: rgb(147, 143, 170); */
 }
 
 .tasks-container {
-    background-color: darkorange;
+    /* background-color: darkorange; */
     width: 100%;
 }
 
 .project-card{
     border: 1px solid black;
+    padding: 1em;
+    margin: 5px;
 }
 
 .active-project{
-    background-color: darkorange;
+    box-shadow: inset 0 0 10px darkorange;
 }
 
 #add-new-project-btn {
@@ -94,6 +96,8 @@ body{
 
 .task-card{
     border: 1px solid black;
+    padding: 1em;
+    margin: 5px;
 }
 
 .task-title-container {
