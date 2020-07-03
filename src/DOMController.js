@@ -81,7 +81,7 @@ const DOMController = (() => {
       const taskDescriptionDiv = document.createElement('div');
       const taskDescription = document.createElement('p');
       const taskChecklist = createChecklist(task.getChecklist());
-      const taskCompleted = document.createElement('button');
+      const taskCompleted = document.createElement('input');
 
       taskCard.classList.add('task-card');
       taskCard.setAttribute('data-ID', task.getUUID());
@@ -90,9 +90,10 @@ const DOMController = (() => {
 
       taskTitle.textContent = task.getTitle();
       taskDescription.textContent = task.getDescription();
+      taskCompleted.type = 'checkbox';
       if (task.isCompleted()) {
-        taskCompleted.style['background-color'] = 'green';
-      } else { taskCompleted.style['background-color'] = 'red'; }
+        taskCompleted.checked = true;
+      } else { taskCompleted.checked = false; }
 
       taskTitleDiv.appendChild(taskTitle);
       taskTitleDiv.appendChild(taskCompleted);
