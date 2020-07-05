@@ -51,7 +51,7 @@ const DOMController = (() => {
 
   const createChecklist = (checklist) => {
     const checklistDiv = document.createElement('div');
-    checklistDiv.classList.add('checklist-container');
+    checklistDiv.classList.add('task-checklist-container');
     if (checklist) {
       checklist.forEach((item) => {
         const checklistItem = document.createElement('div');
@@ -80,6 +80,8 @@ const DOMController = (() => {
       const taskTitle = document.createElement('h4');
       const taskDescriptionDiv = document.createElement('div');
       const taskDescription = document.createElement('p');
+      const taskNotesDiv = document.createElement('div');
+      const taskNotes = document.createElement('p');
       const taskChecklist = createChecklist(task.getChecklist());
       const taskCompleted = document.createElement('input');
 
@@ -87,9 +89,11 @@ const DOMController = (() => {
       taskCard.setAttribute('data-ID', task.getUUID());
       taskTitleDiv.classList.add('task-title-container');
       taskDescriptionDiv.classList.add('task-description-container');
+      taskNotesDiv.classList.add('task-notes-container');
 
       taskTitle.textContent = task.getTitle();
       taskDescription.textContent = task.getDescription();
+      taskNotes.textContent = task.getNotes();
       taskCompleted.type = 'checkbox';
       if (task.isCompleted()) {
         taskCompleted.checked = true;
@@ -98,8 +102,10 @@ const DOMController = (() => {
       taskTitleDiv.appendChild(taskTitle);
       taskTitleDiv.appendChild(taskCompleted);
       taskDescriptionDiv.appendChild(taskDescription);
+      taskNotesDiv.appendChild(taskNotes);
       taskCard.appendChild(taskTitleDiv);
       taskCard.appendChild(taskDescriptionDiv);
+      taskCard.appendChild(taskNotesDiv);
       taskCard.appendChild(taskChecklist);
 
       tasksContainer.appendChild(taskCard);
@@ -163,7 +169,7 @@ const DOMController = (() => {
       priority: document.getElementById('task-priority-select').value,
       dueDate: document.getElementById('task-due-date').value,
       notes: document.getElementById('task-notes-input').value,
-      projectID: document.querySelector('active-project').dataset.id,
+      projectID: document.querySelector('.active-project').dataset.id,
     };
     if (!input.title || !input.dueDate) {
       pubSub.emit('taskAddError', 'Fill out required fields');

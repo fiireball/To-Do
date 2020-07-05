@@ -67,6 +67,7 @@ const createNewTask = (input) => {
   const _newTask = taskFactory(input.title, input.description, input.dueDate,
     input.priority, input.notes, input.checklist, false, input.projectID);
   console.log(_newTask);
+  console.log(_newTask.getNotes());
   pubSub.emit('newTaskCreated', _newTask);
 };
 
