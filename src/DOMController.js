@@ -101,6 +101,9 @@ const DOMController = (() => {
       taskDueDateDiv.textContent = task.getDueDate();
       taskDescription.textContent = task.getDescription();
       taskNotes.textContent = task.getNotes();
+      if (taskNotes.textContent === '') {
+        taskNotes.textContent = 'No notes.';
+      }
       taskCompleted.type = 'checkbox';
       if (task.isCompleted()) {
         taskCompleted.checked = true;
@@ -173,9 +176,13 @@ const DOMController = (() => {
   };
 
   const formatDateInput = (date) => {
-    console.log(date)
-    const dateArr = date.split('-');
-    return format(new Date(dateArr[0], dateArr[1], dateArr[2]), "dd.MM.yyyy");
+    if (date) {
+      const dateArr = date.split('-');
+      console.log(dateArr);
+      console.log(new Date(dateArr[0], dateArr[1], dateArr[2]))
+      return format(new Date(dateArr[0], dateArr[1] - 1, dateArr[2]), "dd.MM.yyyy");
+    }
+    return 'Error in date';
   };
 
   const getNewTaskUserInput = () => {
