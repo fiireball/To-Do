@@ -2,7 +2,7 @@
 import createUUID from './utils';
 import pubSub from "./pubsub";
 
-const taskFactory = (title, description, dueDate, priority, notes, checklist, completed, UUID) => {
+const taskFactory = (title, description, dueDate, priority, notes, checklist, completed, UUID, projectID) => {
   const _type = 'Task';
   let _title = title;
   let _description = description;
@@ -12,6 +12,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   let _checklist = checklist;
   let _completed = completed;
   let _UUID = UUID;
+  let _projectID = projectID;
 
   // GETTER & SETTER
   const getType = () => _type;
@@ -64,7 +65,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
 
 const createNewTask = (input) => {
   const _newTask = taskFactory(input.title, input.description, input.dueDate,
-    input.priority, input.notes, input.checklist, false);
+    input.priority, input.notes, input.checklist, false, input.projectID);
   console.log(_newTask);
   pubSub.emit('newTaskCreated', _newTask);
 };

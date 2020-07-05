@@ -163,6 +163,7 @@ const DOMController = (() => {
       priority: document.getElementById('task-priority-select').value,
       dueDate: document.getElementById('task-due-date').value,
       notes: document.getElementById('task-notes-input').value,
+      projectID: document.querySelector('active-project').dataset.id,
     };
     if (!input.title || !input.dueDate) {
       pubSub.emit('taskAddError', 'Fill out required fields');
