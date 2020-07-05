@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import { add } from 'date-fns';
+import { format } from 'date-fns';
 import projectSorage from './storage.js';
 import pubSub from './pubsub.js';
 import projectStorage from './storage.js';
@@ -172,12 +172,18 @@ const DOMController = (() => {
     pubSub.emit('newProjectToCreate', input);
   };
 
+  const formatDateInput = (date) => {
+    console.log(date)
+    const dateArr = date.split('-');
+    return format(new Date(dateArr[0], dateArr[1], dateArr[2]), "dd.MM.yyyy");
+  };
+
   const getNewTaskUserInput = () => {
     const input = {
       title: document.getElementById('new-task-title').value,
       description: document.getElementById('new-task-description').value,
       priority: document.getElementById('task-priority-select').value,
-      dueDate: document.getElementById('task-due-date').value,
+      dueDate: formatDateInput(document.getElementById('task-due-date').value),
       notes: document.getElementById('task-notes-input').value,
       projectID: document.querySelector('.active-project').dataset.id,
     };
