@@ -76,7 +76,10 @@ const DOMController = (() => {
 
     tasks.forEach((task) => {
       const taskCard = document.createElement('div');
+      const taskHeader = document.createElement('div');
+      const taskContent = document.createElement('div');
       const taskTitleDiv = document.createElement('div');
+      const taskDueDateDiv = document.createElement('div');
       const taskTitle = document.createElement('h4');
       const taskDescriptionDiv = document.createElement('div');
       const taskDescription = document.createElement('p');
@@ -86,12 +89,16 @@ const DOMController = (() => {
       const taskCompleted = document.createElement('input');
 
       taskCard.classList.add('task-card');
+      taskHeader.classList.add('task-header');
+      taskContent.classList.add('task-content-container');
       taskCard.setAttribute('data-ID', task.getUUID());
       taskTitleDiv.classList.add('task-title-container');
+      taskDueDateDiv.classList.add('task-dueDate-container');
       taskDescriptionDiv.classList.add('task-description-container');
       taskNotesDiv.classList.add('task-notes-container');
 
       taskTitle.textContent = task.getTitle();
+      taskDueDateDiv.textContent = task.getDueDate();
       taskDescription.textContent = task.getDescription();
       taskNotes.textContent = task.getNotes();
       taskCompleted.type = 'checkbox';
@@ -103,10 +110,13 @@ const DOMController = (() => {
       taskTitleDiv.appendChild(taskCompleted);
       taskDescriptionDiv.appendChild(taskDescription);
       taskNotesDiv.appendChild(taskNotes);
-      taskCard.appendChild(taskTitleDiv);
-      taskCard.appendChild(taskDescriptionDiv);
-      taskCard.appendChild(taskNotesDiv);
-      taskCard.appendChild(taskChecklist);
+      taskHeader.appendChild(taskTitleDiv);
+      taskHeader.appendChild(taskDueDateDiv);
+      taskContent.appendChild(taskDescriptionDiv);
+      taskContent.appendChild(taskNotesDiv);
+      taskContent.appendChild(taskChecklist);
+      taskCard.appendChild(taskHeader);
+      taskCard.appendChild(taskContent);
 
       tasksContainer.appendChild(taskCard);
     });
