@@ -96,6 +96,7 @@ const DOMController = (() => {
       taskDueDateDiv.classList.add('task-dueDate-container');
       taskDescriptionDiv.classList.add('task-description-container');
       taskNotesDiv.classList.add('task-notes-container');
+      taskCompleted.classList.add('task-checkbox');
 
       taskTitle.textContent = task.getTitle();
       taskDueDateDiv.textContent = task.getDueDate();
@@ -123,6 +124,7 @@ const DOMController = (() => {
 
       tasksContainer.appendChild(taskCard);
     });
+    pubSub.emit('tasksRendered', tasksContainer);
   };
 
   const clearTasks = () => {
@@ -253,7 +255,18 @@ const clickListeners = (() => {
     DOMController.getNewTaskUserInput();
   });
 
+  const addTaskCheckboxListeners = (tasksContainer) => {
+    const taskCheckboxes = tasksContainer.querySelectorAll('.task-checkbox');
+    for (let i = 0; i < taskCheckboxes.length; i++) {
+      taskCheckboxes[i].addEventListener('click', () => {
+        console.log('this task ID: ', taskCheckboxes[i].closest('.task-card').dataset.id);
+        pubSub.emit('aTaskCheckboxToggled', taskCheckboxes[i].closest('.task-card').dataset.id);
+      });
+    }
+  };
+
   pubSub.on('projectsRendered', addProjectListeners);
+  pubSub.on('tasksRendered', addTaskCheckboxListeners);
 })();
 
 export default DOMController;

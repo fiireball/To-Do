@@ -35,12 +35,25 @@ const projectStorage = (() => {
     }
   };
 
+  const getTaskByID = (taskID) => {
+    const _activeProject = getActiveProject();
+    const _task = _activeProject.getTaskByID(taskID)
+    console.log('_task: ', _task);
+    return _task;
+  };
+
+  const toggleTaskCompletedByID = (taskID) => {
+    const _task = getTaskByID(taskID);
+    _task.toggleCompleted();
+  };
+
   return {
     getAllProjects,
     addNewProject,
     setProjects,
     getActiveProject,
     getProjectByID,
+    toggleTaskCompletedByID,
   };
 })();
 
@@ -58,5 +71,6 @@ const addTaskToActiveProject = (newTask) => {
 
 pubSub.on('newTaskCreated', addTaskToActiveProject);
 pubSub.on('newProjectCreated', projectStorage.addNewProject);
+pubSub.on('aTaskCheckboxToggled', projectStorage.toggleTaskCompletedByID);
 
 export default projectStorage;

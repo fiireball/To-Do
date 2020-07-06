@@ -22,6 +22,16 @@ const projectFactory = (title, description, color, UUID) => {
   const getTasks = () => _tasks;
   const setTasks = (newTask) => { _tasks = newTask; };
 
+  const getTaskByID = (taskID) => {
+    for (let i = 0; i < _tasks.length; i++) {
+      if (_tasks[i].getUUID() === taskID) {
+        return _tasks[i];
+      }
+    }
+    console.log('No task with ID: ', taskID);
+    return `No task with ID: , ${taskID}`;
+  };
+
   const isActive = () => _isActive;
   const setActiveTrue = () => { _isActive = true; };
   const setActiveFalse = () => { _isActive = false; };
@@ -60,6 +70,7 @@ const projectFactory = (title, description, color, UUID) => {
     getTasks,
     addTask,
     setTasks,
+    getTaskByID,
     isActive,
     setActiveTrue,
     setActiveFalse,

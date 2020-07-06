@@ -29,7 +29,10 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
 
   const getChecklist = () => _checklist;
 
-  const getUUID = () => _UUID;
+  const getUUID = () => {
+    console.log(_UUID);
+    return _UUID;
+  };
 
   const isCompleted = () => _completed;
 
@@ -44,7 +47,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   const initUUID = (() => {
     if (UUID) {
       _UUID = UUID;
-    } else {
+    } else if (_UUID === undefined) {
       _UUID = createUUID(_type);
     }
   })();
