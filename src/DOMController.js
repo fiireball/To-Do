@@ -53,14 +53,18 @@ const DOMController = (() => {
     const checklistDiv = document.createElement('div');
     checklistDiv.classList.add('task-checklist-container');
     if (checklist) {
+      let index = 0;
       checklist.forEach((item) => {
         const checklistItem = document.createElement('div');
 
         checklistItem.classList.add('checklist-item');
+        checklistItem.setAttribute('data-index', index);
 
         checklistItem.textContent = item;
 
         checklistDiv.appendChild(checklistItem);
+
+        index++
       });
     }
     return checklistDiv;
