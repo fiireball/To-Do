@@ -30,7 +30,6 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   const getChecklist = () => _checklist;
 
   const getUUID = () => {
-    console.log(_UUID);
     return _UUID;
   };
 

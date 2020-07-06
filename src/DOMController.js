@@ -259,7 +259,6 @@ const clickListeners = (() => {
     const taskCheckboxes = tasksContainer.querySelectorAll('.task-checkbox');
     for (let i = 0; i < taskCheckboxes.length; i++) {
       taskCheckboxes[i].addEventListener('click', () => {
-        console.log('this task ID: ', taskCheckboxes[i].closest('.task-card').dataset.id);
         pubSub.emit('aTaskCheckboxToggled', taskCheckboxes[i].closest('.task-card').dataset.id);
       });
     }

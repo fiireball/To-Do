@@ -23,7 +23,6 @@ const projectStorage = (() => {
         _activeProject = _projects[i];
       }
     }
-    console.log('_activeProject: ', _activeProject);
     return _activeProject;
   };
 
@@ -38,7 +37,6 @@ const projectStorage = (() => {
   const getTaskByID = (taskID) => {
     const _activeProject = getActiveProject();
     const _task = _activeProject.getTaskByID(taskID)
-    console.log('_task: ', _task);
     return _task;
   };
 
