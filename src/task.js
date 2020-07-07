@@ -75,6 +75,11 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     getNotes,
     getChecklist,
     getUUID,
+    setTitle,
+    setDescription,
+    setDueDate,
+    setPriority,
+    setNotes,
     isCompleted,
     toggleCompleted,
   };
