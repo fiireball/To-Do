@@ -18,14 +18,29 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   const getType = () => _type;
 
   const getTitle = () => _title;
+  const setTitle = (newTitle) => {
+    _title = newTitle;
+  };
 
   const getDescription = () => _description;
+  const setDescription = (newDescription) => {
+    _description = newDescription;
+  };
 
   const getDueDate = () => _dueDate;
+  const setDueDate = (newDueDate) => {
+    _dueDate = newDueDate;
+  };
 
   const getPriority = () => _priority;
+  const setPriority = (newPriority) => {
+    _priority = newPriority;
+  };
 
   const getNotes = () => _notes;
+  const setNotes = (newNotes) => {
+    _notes = newNotes;
+  };
 
   const getChecklist = () => _checklist;
 
