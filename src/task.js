@@ -43,6 +43,9 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
   };
 
   const getChecklist = () => _checklist;
+  const addChecklist = (newChecklist) => {
+    checklist.push(newChecklist)
+  };
 
   const getUUID = () => {
     return _UUID;
@@ -74,6 +77,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
     getPriority,
     getNotes,
     getChecklist,
+    addChecklist,
     getUUID,
     setTitle,
     setDescription,
@@ -94,5 +98,32 @@ const createNewTask = (input) => {
 };
 
 pubSub.on('newTaskToCreate', createNewTask);
+
+const checklistFactory = (text, completed) => {
+  const _type = 'Checklist';
+  let _text = text;
+  let _completed = completed;
+
+  const getText = () => _text;
+  const setText = (newText) => {
+    _text = newText;
+  }
+
+  const isCompleted = () => _completed;
+  const toggleCompleted = () => {
+    if (_completed) {
+      _completed = false;
+    } else {
+      _completed = true;
+    }
+  };
+
+  return {
+    getText,
+    setText,
+    isCompleted,
+    toggleCompleted,
+  };
+};
 
 export default taskFactory;
