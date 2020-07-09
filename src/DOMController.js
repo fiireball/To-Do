@@ -63,6 +63,7 @@ const DOMController = (() => {
         checklistItem.classList.add('checklist-item');
         checklistItem.setAttribute('data-index', index);
         checklistCheckbox.type = 'checkbox';
+        checklistCheckbox.classList.add('checklist-checkbox')
 
         checklistLabel.textContent = item.getText();
         if (item.isCompleted()) {
