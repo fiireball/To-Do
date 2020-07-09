@@ -271,9 +271,17 @@ const clickListeners = (() => {
 
   const addTaskCheckboxListeners = (tasksContainer) => {
     const taskCheckboxes = tasksContainer.querySelectorAll('.task-checkbox');
+    const checklistCheckboxes = tasksContainer.querySelectorAll('.checklist-checkbox');
     for (let i = 0; i < taskCheckboxes.length; i++) {
       taskCheckboxes[i].addEventListener('click', () => {
         pubSub.emit('aTaskCheckboxToggled', taskCheckboxes[i].closest('.task-card').dataset.id);
+      });
+    }
+    for (let i = 0; i < checklistCheckboxes.length; i++) {
+      const taskID = checklistCheckboxes[i].closest('.task-card').dataset.id;
+      const checkboxIndex = checklistCheckboxes[i].closest('.checklist-item').dataset.index;
+      checklistCheckboxes[i].addEventListener('click', () => {
+        pubSub.emit('aChecklistCheckboxToggled', { taskID, index: checkboxIndex });
       });
     }
   };

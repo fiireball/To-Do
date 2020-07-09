@@ -45,6 +45,14 @@ const projectStorage = (() => {
     _task.toggleCompleted();
   };
 
+  const toggleChecklistCompletedByTaskID = (input) => {
+    const _taskID = input.taskID;
+    const _task = getTaskByID(_taskID);
+    const _index = input.index;
+    const _checklist = _task.getChecklist();
+    _checklist[_index].toggleCompleted();
+  };
+
   return {
     getAllProjects,
     addNewProject,
@@ -52,6 +60,7 @@ const projectStorage = (() => {
     getActiveProject,
     getProjectByID,
     toggleTaskCompletedByID,
+    toggleChecklistCompletedByTaskID,
   };
 })();
 
@@ -70,5 +79,6 @@ const addTaskToActiveProject = (newTask) => {
 pubSub.on('newTaskCreated', addTaskToActiveProject);
 pubSub.on('newProjectCreated', projectStorage.addNewProject);
 pubSub.on('aTaskCheckboxToggled', projectStorage.toggleTaskCompletedByID);
+pubSub.on('aChecklistCheckboxToggled', projectStorage.toggleChecklistCompletedByTaskID);
 
 export default projectStorage;
