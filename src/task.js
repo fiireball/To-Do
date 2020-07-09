@@ -44,7 +44,7 @@ const taskFactory = (title, description, dueDate, priority, notes, checklist, co
 
   const getChecklist = () => _checklist;
   const addChecklist = (newChecklist) => {
-    checklist.push(newChecklist)
+    checklist.push(newChecklist);
   };
 
   const getUUID = () => {
@@ -107,7 +107,7 @@ const checklistFactory = (text, completed) => {
   const getText = () => _text;
   const setText = (newText) => {
     _text = newText;
-  }
+  };
 
   const isCompleted = () => _completed;
   const toggleCompleted = () => {
