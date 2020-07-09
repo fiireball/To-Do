@@ -56,12 +56,21 @@ const DOMController = (() => {
       let index = 0;
       checklist.forEach((item) => {
         const checklistItem = document.createElement('div');
+        const checklistLabel = document.createElement('label');
+        const checklistCheckbox = document.createElement('input');
+
 
         checklistItem.classList.add('checklist-item');
         checklistItem.setAttribute('data-index', index);
+        checklistCheckbox.type = 'checkbox';
 
-        checklistItem.textContent = item;
+        checklistLabel.textContent = item.getText();
+        if (item.isCompleted()) {
+          checklistCheckbox.checked = true;
+        } else { checklistCheckbox.checked = false; }
 
+        checklistItem.appendChild(checklistLabel);
+        checklistLabel.appendChild(checklistCheckbox);
         checklistDiv.appendChild(checklistItem);
 
         index++

@@ -126,4 +126,4 @@ const checklistFactory = (text, completed) => {
   };
 };
 
-export default taskFactory;
+export { taskFactory, checklistFactory };
