@@ -51,7 +51,12 @@ const DOMController = (() => {
 
   const createChecklist = (checklist) => {
     const checklistDiv = document.createElement('div');
+    const checklistHeader = document.createElement('div');
     checklistDiv.classList.add('task-checklist-container');
+    checklistHeader.classList.add('checklist-header');
+    checklistHeader.textContent = 'Checklist:';
+    checklistDiv.appendChild(checklistHeader);
+
     if (checklist) {
       let index = 0;
       checklist.forEach((item) => {
